@@ -1,0 +1,21 @@
+.button-primary {
+    border: 1px solid peru;
+    border-radius: 8px;
+    background: white;
+    padding: 10px 20px;
+}
+
+.button-primary:hover {
+    background: grey;
+}
+
+.button-secondary {
+    border: 1px solid gold;
+    border-radius: 8px;
+    background: white;
+    padding: 10px 20px;
+}
+
+.button-secondary:hover {
+    background: grey;
+}

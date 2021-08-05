@@ -1,22 +1,21 @@
 import {useEffect, useState} from "react";
-import {calculateResult, initCells} from "../game-utils";
-import Tile from "./Tile.Jsx";
-import {containerStyle} from "./MainBoard";
-import {usePlayerContext} from "../Player";
+import {calculateResult, initCells} from "../utils/game-utils";
+import {useGameContext} from "../context/GameContext";
+import './../css/SubBoard.css'
 
-export default function SubBoard({value, key, onResult}) {
+export default function SubBoard({value, subBoardIndex, onResult}) {
 	const [tiles, setTiles] = useState(() => initCells())
-	const {playerContext, setPlayerContext} = usePlayerContext()
+	const {gameContext, setGameContext} = useGameContext()
 	
 	function onTileClicked(index) {
-		if (playerContext.turnStage !== 'tile' ||
-			playerContext.activeBoard !== key ||
+		if (gameContext.turnStage !== 'tile' ||
+			gameContext.activeBoard !== subBoardIndex ||
 			tiles[index] !== null) {
 			return
 		}
 		
 		const newTiles = [...tiles]
-		newTiles[index] = playerContext.currentPlayer
+		newTiles[index] = gameContext.currentPlayer
 		setTiles(newTiles)
 		
 		const result = calculateResult(newTiles, index)
@@ -25,11 +24,11 @@ export default function SubBoard({value, key, onResult}) {
 			onResult(index, result)
 		}
 		
-		setPlayerContext({
-			...playerContext,
+		setGameContext({
+			...gameContext,
 			turnStage: 'board',
 			activeBoard: null,
-			totalPlayerMoves: playerContext.totalPlayerMoves + 1
+			totalPlayerMoves: gameContext.totalPlayerMoves + 1
 		})
 	}
 	
@@ -41,12 +40,19 @@ export default function SubBoard({value, key, onResult}) {
 	}, [value])
 	
 	return (
-		<div style={containerStyle}>
-			{
-				tiles.map((tileValue, index) => {
-					return <Tile value={tileValue} key={index} onClick={() => onTileClicked(index)}/>
-				})
-			}
+		//
+		<div className="sub-board-item">
+			<div className="sub-board-container">
+				{
+					tiles.map((tileValue, index) => {
+						return <div key={index} className="tile" onClick={() => onTileClicked(index)}>
+							<span>{tileValue}</span>
+						</div>
+						// todo:
+						// 	disable inactive sub-boards
+					})
+				}
+			</div>
 		</div>
 	
 	)

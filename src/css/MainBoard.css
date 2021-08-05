@@ -1,0 +1,10 @@
+.board-container {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: calc(100% - 100px);
+    max-width: 50%;
+    margin: auto;
+}

@@ -1,0 +1,54 @@
+.sub-board-item {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex: 1 0 30%;
+    height: 240px;
+    border: 1px dashed grey;
+}
+
+/*.sub-board-item:nth-child(2),.tile:nth-child(2) {*/
+/*   border-bottom: 1px solid grey;*/
+/*   border-left: 1px solid grey;*/
+/*   border-right: 1px solid grey;*/
+/*}*/
+
+/*.sub-board-item:nth-child(4),.tile:nth-child(4) {*/
+/*   border-top: 1px solid grey;*/
+/*   border-bottom: 1px solid grey;*/
+/*   border-right: 1px solid grey;*/
+/*}*/
+
+/*.sub-board-item:nth-child(6),.tile:nth-child(6) {*/
+/*   border-top: 1px solid grey;*/
+/*   border-bottom: 1px solid grey;*/
+/*   border-left: 1px solid grey;*/
+/*}*/
+
+/*.sub-board-item:nth-child(8),.tile:nth-child(8) {*/
+/*   border-top: 1px solid grey;*/
+/*   border-left: 1px solid grey;*/
+/*   border-right: 1px solid grey;*/
+/*}*/
+
+.tile {
+    padding: 17px;
+    width: 15%;
+    height: 15%;
+    border: 1px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tile:hover {
+    background: #f1e8e8;
+}
+
+.sub-board-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 47px;
+}

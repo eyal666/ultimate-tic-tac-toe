@@ -1,20 +1,16 @@
-import './App.css';
-import MainBoard from "./components/MainBoard";
 import {useState} from "react";
-import {initPlayerContext, PlayerContext} from "./Player";
+import {GameContext, initGameContext} from "./context/GameContext";
+import {GameManager} from "./components/GameManager";
+import './css/App.css'
 
 
 function App() {
-	// currentPlayer: 'X' or 'O'
-	// turnStage: 'tile' or 'board'
 	
-	const [playerContext, setPlayerContext] = useState(() => initPlayerContext())
+	const [gameContext, setGameContext] = useState(() => initGameContext())
 	return (
-		<div className="App">
-			<PlayerContext.Provider value={{playerContext, setPlayerContext}}>
-				<MainBoard/>
-			</PlayerContext.Provider>
-		</div>
+		<GameContext.Provider value={{gameContext, setGameContext}}>
+			<GameManager/>
+		</GameContext.Provider>
 	);
 }
 
