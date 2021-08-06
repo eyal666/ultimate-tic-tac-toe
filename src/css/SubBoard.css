@@ -39,7 +39,7 @@
 
 .big-logo {
     position: absolute;
-    z-index: 2;
+    z-index: 0;
 }
 
 .x-board-color {

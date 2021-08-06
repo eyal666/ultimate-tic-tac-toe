@@ -10,6 +10,7 @@ export function calculateResult(boardArr) {
 		[boardArr[3], boardArr[4], boardArr[5]],
 		[boardArr[6], boardArr[7], boardArr[8]]
 	]
+	
 	let i
 	//rows
 	for (i = 0; i < 3; i++) {
@@ -41,8 +42,14 @@ export function changePlayer(currentPlayer) {
 	return currentPlayer === 'X' ? 'O' : 'X'
 }
 
+export function loadLeaderboard() {
+	const leaderboard = JSON.parse(localStorage.getItem('leaderboard'))
+	
+	return leaderboard ?? []
+}
+
 export function persistLeaderboardEntry(name, numOfSteps) {
-	let leaderboard = loadLeaderBoard()
+	let leaderboard = loadLeaderboard()
 	
 	leaderboard.push({name, numOfSteps})
 	leaderboard.sort((entry1, entry2) => entry1.numOfSteps - entry2.numOfSteps)
@@ -50,8 +57,14 @@ export function persistLeaderboardEntry(name, numOfSteps) {
 	localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
 }
 
-export function loadLeaderBoard() {
-	const leaderboard = JSON.parse(localStorage.getItem('leaderboard'))
-	
-	return leaderboard ?? []
-}
+export const modalStyles = {
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)',
+		background: 'lightslategray',
+	},
+};

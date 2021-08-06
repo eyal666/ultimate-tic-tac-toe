@@ -1,0 +1,18 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.xxx-large-font-size {
+    font-size: xxx-large;
+    font-weight: bold;
+}
+
+.X-color {
+    color: #eca5a4;
+}
+
+.O-color {
+    color: #aadeef;
+}
+

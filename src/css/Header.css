@@ -1,37 +1,12 @@
 .header-container {
     width: 100%;
     height: 100px;
-    background: lightslategray;
     display: flex;
+    background: lightslategray;
     justify-content: space-around;
     align-items: center;
 }
 
-.button {
-    display: flex;
-    align-items: center;
-    border: 1px transparent;
-    border-radius: 20px;
-    background: white;
-    padding: 10px 20px;
-    max-height: 40px;
-    font-family: 'Oswald', serif;
-    font-size: x-large;
-}
 
-.button:hover {
-    background: #b3b9be;
-}
 
-.xxx-large-font-size {
-    font-size: xxx-large;
-    font-weight: bold;
-}
 
-.X-color {
-    color: #eca5a4;
-}
-
-.O-color {
-    color: #aadeef;
-}

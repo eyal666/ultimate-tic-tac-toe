@@ -2,32 +2,33 @@ import MainBoard from "./MainBoard";
 import Header from "./Header";
 import {initGameContext, useGameContext} from "../context/GameContext";
 import {useEffect, useState} from "react";
-import Leaderboard from "./LeaderBoard";
+import Leaderboard from "./Leaderboard";
 import NameModal from "./NameModal";
 import './../css/GameManager.css'
 
 export function GameManager() {
 	const {gameContext, setGameContext} = useGameContext()
-	const [showLeaderBoard, setShowLeaderBoard] = useState(false)
+	const [showLeaderboard, setShowLeaderboard] = useState(false)
 	const [showNameModal, setShowNameModal] = useState(false)
 	const [shouldResetGame, setShouldResetGame] = useState(false)
 	
-	//todo
-	// test:
-	// winning
-	// tie
-	
-	// todo: should be passed to name input dialog
 	function onSubmitPlayerName() {
 		setShowNameModal(false)
-		setShowLeaderBoard(true)
+		setShowLeaderboard(true)
 	}
 	
 	function startNewGame() {
 		setShouldResetGame(true)
-		setShowLeaderBoard(false)
+		setShowLeaderboard(false)
 		setShowNameModal(false)
 		setGameContext(initGameContext())
+	}
+	
+	function closeLeaderboard() {
+		setShowLeaderboard(false)
+		if (gameContext.winner) {
+			startNewGame()
+		}
 	}
 	
 	useEffect(() => {
@@ -36,9 +37,6 @@ export function GameManager() {
 			return
 		}
 		
-		if (gameContext.winner === 'tie') {
-			//todo open tie modal and init all states
-		}
 		if (winner) {
 			setShowNameModal(true)
 		}
@@ -52,9 +50,9 @@ export function GameManager() {
 	
 	return (
 		<div className="game-container">
-			<Header startNewGame={startNewGame} showLeaderBoard={() => setShowLeaderBoard(true)}/>
-			{showNameModal && <NameModal onSubmitPlayerName={onSubmitPlayerName}/>}
-			{showLeaderBoard && <Leaderboard/>}
+			<Header startNewGame={startNewGame} showLeaderboard={() => setShowLeaderboard(true)}/>
+			<NameModal onSubmitPlayerName={onSubmitPlayerName} isOpen={showNameModal}/>
+			<Leaderboard isOpen={showLeaderboard} onRequestClose={closeLeaderboard}/>
 			<MainBoard shouldResetGame={shouldResetGame}/>
 		</div>
 	)

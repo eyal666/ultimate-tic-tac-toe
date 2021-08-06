@@ -12,7 +12,7 @@ export function initGameContext() {
 		activeBoard: null,
 		// 'X', 'O', 'tie' or null
 		winner: null,
-		winnerName: ''
+		// winnerName: ''
 	}
 }
 

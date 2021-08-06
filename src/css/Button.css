@@ -1,0 +1,24 @@
+.button {
+    display: flex;
+    align-items: center;
+    border: 1px transparent;
+    border-radius: 20px;
+    font-family: 'Oswald', serif;
+    padding: 10px 20px;
+    background: white;
+}
+
+.button-primary {
+    max-height: 40px;
+    font-size: x-large;
+}
+
+.button-secondary {
+    max-height: 30px;
+    font-size: large;
+    margin-left: 10px;
+}
+
+.button:hover {
+    background: #b3b9be;
+}

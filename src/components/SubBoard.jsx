@@ -27,18 +27,6 @@ export default function SubBoard({
 		updateMainBoard(tileIndex, subBoardIndex, subBoardResult)
 	}
 	
-	// function renderPlayerLogo(cellValue, size) {
-	// 	if (!cellValue) {
-	// 		return ''
-	// 	} else {
-	// 		return `/img/${cellValue}_${size}.png`
-	// 	}
-	// }
-	
-	// function calculateClassName(tileValue) {
-	// 	return `tile ${isActive ? 'active-board' : 'hover-disabled'} ${tileValue ? 'hover-disabled' : ''} ${boardValue && (boardValue === 'X' ? 'x-board-color' : 'o-board-color')}`
-	// }
-	
 	function calculateClassName(tileValue) {
 		let className = 'tile '
 		if (isActive) {
@@ -55,7 +43,6 @@ export default function SubBoard({
 		
 		return className
 	}
-	
 	
 	//zeroing states
 	useEffect(() => {
@@ -80,6 +67,5 @@ export default function SubBoard({
 				}
 			</div>
 		</div>
-	
 	)
 }
