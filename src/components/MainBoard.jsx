@@ -1,51 +1,51 @@
 import {useGameContext} from "../context/GameContext";
-import {useState} from "react";
-import {calculateResult, changePlayer, initCells} from "../utils/game-utils";
+import {useEffect, useState} from "react";
+import {calculateResult, initCells} from "../utils/game-utils";
 import SubBoard from "./SubBoard";
 import './../css/MainBoard.css'
 
-export default function MainBoard() {
+export default function MainBoard({shouldResetGame}) {
 	const {gameContext, setGameContext} = useGameContext()
-	
 	const [boards, setBoards] = useState(() => initCells())
-
 	
-	function onBoardClicked(index) {
-		//todo:
-		if (gameContext.turnStage !== 'board' ||
-			boards[index] !== null) {
-			return;
-		}
-		
-		setGameContext({...gameContext, activeBoard: index, currentPlayer: changePlayer(gameContext.currentPlayer)})
+	function calculateActiveBoard(index) {
+		return boards[index] !== null ? null : index
 	}
 	
-	function onResult(subResult, index) {
+	function onResult(index, subResult) {
 		const newBoards = [...boards]
 		newBoards[index] = subResult
 		setBoards(newBoards)
 		
-		const mainResult = calculateResult(newBoards, index)
+		const mainResult = calculateResult(newBoards)
 		if (mainResult) {
 			setGameContext({...gameContext, winner: gameContext.currentPlayer})
 		}
 	}
 	
-
+	function isSubBoardActive(index) {
+		return boards[index] === null &&
+			(gameContext.activeBoard === null || gameContext.activeBoard === index)
+	}
+	
+	useEffect(() => {
+		if (shouldResetGame) {
+			setBoards(initCells())
+		}
+	}, [shouldResetGame])
 	
 	return (
 		<div className="board-container">
 			{
 				boards.map((boardValue, index) => {
-					return <SubBoard value={boardValue} subBoardIndex={index} key={index} onClick={() => onBoardClicked(index)}
-					                 onResult={onResult}/>
-					//	todo:
-					// 	disable inactive sub-boards
+					return <SubBoard boardValue={boardValue} key={index} subBoardIndex={index}
+					                 calculateActiveBoard={calculateActiveBoard}
+					                 isActive={isSubBoardActive(index)}
+					                 onResult={onResult}
+					                 shouldResetGame={shouldResetGame}
+					/>
 				})
 			}
-			{/*
-			
-			*/}
 		</div>
 	)
 }

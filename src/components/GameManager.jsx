@@ -10,6 +10,7 @@ export function GameManager() {
 	const {gameContext, setGameContext} = useGameContext()
 	const [showLeaderBoard, setShowLeaderBoard] = useState(false)
 	const [showNameModal, setShowNameModal] = useState(false)
+	const [shouldResetGame, setShouldResetGame] = useState(false)
 	
 	// todo: should be passed to name input dialog
 	function onSubmitPlayerName() {
@@ -18,10 +19,10 @@ export function GameManager() {
 	}
 	
 	function startNewGame() {
-		setGameContext(initGameContext())
-		//todo: init Main Board and send boolean prop
+		setShouldResetGame(true)
 		setShowLeaderBoard(false)
 		setShowNameModal(false)
+		setGameContext(initGameContext())
 	}
 	
 	useEffect(() => {
@@ -38,12 +39,18 @@ export function GameManager() {
 		}
 	}, [gameContext.winner])
 	
+	useEffect(() => {
+		if (shouldResetGame) {
+			setShouldResetGame(false)
+		}
+	}, [shouldResetGame])
+	
 	return (
 		<div className="game-container">
-			<Header/>
+			<Header startNewGame={startNewGame}/>
 			{showNameModal && <NameModal onSubmitPlayerName={onSubmitPlayerName}/>}
 			{showLeaderBoard && <Leaderboard/>}
-			<MainBoard/>
+			<MainBoard shouldResetGame={shouldResetGame}/>
 		</div>
 	)
 }
