@@ -1,46 +1,30 @@
 import {useEffect, useState} from "react";
-import {calculateResult, changePlayer, initCells} from "../utils/game-utils";
+import {calculateResult, initCells} from "../utils/game-utils";
 import {useGameContext} from "../context/GameContext";
 import './../css/SubBoard.css'
 
 export default function SubBoard({
 	                                 boardValue,
-	                                 onResult,
+	                                 updateMainBoard,
 	                                 isActive,
 	                                 subBoardIndex,
-	                                 calculateActiveBoard,
 	                                 shouldResetGame
                                  }) {
 	const [tiles, setTiles] = useState(() => initCells())
-	const {gameContext, setGameContext} = useGameContext()
+	const {gameContext} = useGameContext()
 	
-	function onTileClicked(index) {
-		if (!isActive || tiles[index] !== null) {
+	function onTileClicked(tileIndex) {
+		if (!isActive || tiles[tileIndex] !== null) {
 			return
 		}
 		
-		const {currentPlayer, XSteps, OSteps} = gameContext
-		
 		const newTiles = [...tiles]
-		newTiles[index] = currentPlayer
+		newTiles[tileIndex] = gameContext.currentPlayer
 		setTiles(newTiles)
 		
-		const result = calculateResult(newTiles)
+		const subBoardResult = calculateResult(newTiles)
 		
-		if (result) {
-			onResult(subBoardIndex, result)
-		}
-		
-		const playerSteps = currentPlayer === 'X' ?
-			{XSteps: XSteps + 1} :
-			{OSteps: OSteps + 1}
-		
-		setGameContext({
-			...gameContext,
-			...playerSteps,
-			activeBoard: calculateActiveBoard(index),
-			currentPlayer: changePlayer(currentPlayer),
-		})
+		updateMainBoard(tileIndex, subBoardIndex, subBoardResult)
 	}
 	
 	// function renderPlayerLogo(cellValue, size) {
@@ -83,7 +67,8 @@ export default function SubBoard({
 	return (
 		<div className="sub-board-item">
 			<div className="sub-board-container">
-				{boardValue && boardValue !== 'tie' && <img className="big-logo" src={`/img/${boardValue}_bg.png`}/>}
+				{boardValue && boardValue !== 'tie' &&
+				<img className="big-logo" src={`/img/${boardValue}_bg.png`} alt={boardValue}/>}
 				{
 					tiles.map((tileValue, index) => {
 						return <div key={index}

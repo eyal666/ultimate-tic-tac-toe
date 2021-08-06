@@ -12,6 +12,11 @@ export function GameManager() {
 	const [showNameModal, setShowNameModal] = useState(false)
 	const [shouldResetGame, setShouldResetGame] = useState(false)
 	
+	//todo
+	// test:
+	// winning
+	// tie
+	
 	// todo: should be passed to name input dialog
 	function onSubmitPlayerName() {
 		setShowNameModal(false)
@@ -47,7 +52,7 @@ export function GameManager() {
 	
 	return (
 		<div className="game-container">
-			<Header startNewGame={startNewGame}/>
+			<Header startNewGame={startNewGame} showLeaderBoard={() => setShowLeaderBoard(true)}/>
 			{showNameModal && <NameModal onSubmitPlayerName={onSubmitPlayerName}/>}
 			{showLeaderBoard && <Leaderboard/>}
 			<MainBoard shouldResetGame={shouldResetGame}/>
