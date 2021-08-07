@@ -2,6 +2,7 @@ import {loadLeaderboard, modalStyles} from "../utils/game-utils";
 import Modal from "react-modal";
 import {useEffect, useState} from "react";
 import '../css/Leaderboard.css'
+import '../css/Common.css'
 
 export default function Leaderboard({isOpen, onRequestClose}) {
 	const [leaderboardEntries, setLeaderboardEntries] = useState(loadLeaderboard())
@@ -19,7 +20,7 @@ export default function Leaderboard({isOpen, onRequestClose}) {
 			style={modalStyles}
 			onRequestClose={onRequestClose}>
 			{leaderboardEntries.length !== 0 ?
-				<div>
+				<div className="white">
 					<h1 className="flex-container">Leaderboard</h1>
 					<table>
 						<tr>
@@ -37,7 +38,7 @@ export default function Leaderboard({isOpen, onRequestClose}) {
 					</table>
 				</div>
 				:
-				<h1>No winners yet :'(</h1>
+				<h1 className="white">No winners yet :'(</h1>
 			}
 		
 		</Modal>

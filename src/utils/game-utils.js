@@ -65,6 +65,6 @@ export const modalStyles = {
 		bottom: 'auto',
 		marginRight: '-50%',
 		transform: 'translate(-50%, -50%)',
-		background: 'lightslategray',
+		background: '#3c4650',
 	},
 };

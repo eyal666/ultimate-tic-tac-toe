@@ -2,7 +2,7 @@
     width: 100%;
     height: 100px;
     display: flex;
-    background: lightslategray;
+    background: #3c4650;
     justify-content: space-around;
     align-items: center;
 }

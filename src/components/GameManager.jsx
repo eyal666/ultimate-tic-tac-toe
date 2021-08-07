@@ -32,12 +32,7 @@ export function GameManager() {
 	}
 	
 	useEffect(() => {
-		const winner = gameContext.winner
-		if (!winner) {
-			return
-		}
-		
-		if (winner) {
+		if (gameContext.winner) {
 			setShowNameModal(true)
 		}
 	}, [gameContext.winner])
